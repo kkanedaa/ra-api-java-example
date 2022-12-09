@@ -1,0 +1,11 @@
+plugins {
+    id 'java'
+}
+
+group = 'ch.swisssign.ra'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}

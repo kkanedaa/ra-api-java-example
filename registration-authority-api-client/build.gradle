@@ -1,0 +1,60 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.6' apply false
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id "org.openapi.generator" version "6.2.1"
+    id "de.undercouch.download" version "5.3.0"
+    id 'java'
+}
+
+group = 'ch.swisssign.ra'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+dependencyManagement {
+    imports {
+        mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+    }
+}
+
+dependencies {
+    implementation 'org.springframework:spring-web'
+    implementation 'org.springframework:spring-context'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations'
+    implementation 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+task downloadFile(type: Download) {
+    src "https://raw.githubusercontent.com/SwissSign-AG/RaApi/main/api.json"
+    dest buildDir
+    onlyIfModified true
+    useETag true
+}
+
+openApiGenerate {
+    inputSpec = "$buildDir/api.json"
+    apiPackage = "ch.swisssign.ra.gen.client.api"
+    invokerPackage = "ch.swisssign.ra.gen.client.invoker"
+    modelPackage = "ch.swisssign.ra.gen.client.model"
+    generateApiTests = false
+    generateModelTests = false
+    modelNameSuffix = "Dto"
+    generatorName = "java"
+    library = "resttemplate"
+    configOptions = [
+            dateLibrary: "java8"
+    ]
+    skipValidateSpec = false
+    logToStderr = true
+    generateAliasAsModel = false
+    enablePostProcessFile = false
+}
+
+tasks.openApiGenerate.dependsOn tasks.downloadFile
+
+compileJava.dependsOn tasks.openApiGenerate
+
+
+apply plugin: 'org.openapi.generator'

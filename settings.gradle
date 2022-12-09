@@ -1,0 +1,4 @@
+rootProject.name = "registration-authority-java-example"
+
+include "registration-authority-api-client"
+include "registration-authority-app"
