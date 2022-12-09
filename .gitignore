@@ -1,0 +1,17 @@
+*.class
+
+# Package Files #
+*.jar
+
+# Virtual machine crash logs
+hs_err_pid*
+
+# Build files
+**/target
+target
+
+# OS files
+.DS_Store
+
+# IDE files
+**/.idea

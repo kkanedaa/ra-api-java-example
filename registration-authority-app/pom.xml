@@ -1,0 +1,139 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>registration-authority-app</artifactId>
+  <packaging>jar</packaging>
+  <dependencies>
+    <dependency>
+      <groupId>ch.swisssign.ra</groupId>
+      <artifactId>registration-authority-api-client</artifactId>
+      <version>${project.parent.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+      <!-- We do not need Tomcat -->
+      <exclusions>
+        <exclusion>
+          <artifactId>tomcat-embed-el</artifactId>
+          <groupId>org.apache.tomcat.embed</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>tomcat-embed-core</artifactId>
+          <groupId>org.apache.tomcat.embed</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>tomcat-embed-websocket</artifactId>
+          <groupId>org.apache.tomcat.embed</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!-- To poll endpoint -->
+    <dependency>
+      <groupId>org.springframework.retry</groupId>
+      <artifactId>spring-retry</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aspects</artifactId>
+    </dependency>
+    <!-- To generate signed JWT (JWS) -->
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-api</artifactId>
+      <version>${jsonwebtoken.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-impl</artifactId>
+      <version>${jsonwebtoken.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-jackson</artifactId>
+      <version>${jsonwebtoken.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <!-- To generate Certificate Signing Request -->
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcpkix-jdk18on</artifactId>
+      <version>${bouncycastle.version}</version>
+    </dependency>
+    <!-- To generate boilerplate code -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+      <optional>true</optional>
+    </dependency>
+    <!-- IDE Helper -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
+  <parent>
+    <groupId>ch.swisssign.ra</groupId>
+    <artifactId>registration-authority-java-example</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <properties>
+    <bouncycastle.version>1.72</bouncycastle.version>
+    <jsonwebtoken.version>0.11.5</jsonwebtoken.version>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <includes>
+            <include>
+
+            </include>
+          </includes>
+          <excludes>
+            <exclude>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+            </exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <name>registration-authority-app</name>
+  <description>Registration Authority Application</description>
+
+  <profiles>
+    <profile>
+      <id>sonar</id>
+      <properties>
+
+      </properties>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.sonarsource.scanner.maven</groupId>
+              <artifactId>sonar-maven-plugin</artifactId>
+              <version>3.9.1.2184</version>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+  </profiles>
+
+</project>

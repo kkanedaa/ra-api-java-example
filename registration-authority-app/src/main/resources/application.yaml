@@ -1,0 +1,22 @@
+ra:
+  app:
+    api:
+      client: ${RA_APP_API_CLIENT:}
+      username: ${RA_APP_API_USERNAME:}
+      secret: ${RA_APP_API_SECRET:}
+      basePath: ${RA_APP_API_BASE_PATH:}
+      tokenLifetime: ${RA_APP_API_TOKEN_LIFETIME:1m}
+
+logging:
+  level:
+    root: ${RA_APP_LOGGING_LEVEL_ROOT:info}
+    ch:
+      swisssign:
+        ra:
+          app: ${RA_APP_LOGGING_LEVEL_CH_SWISSIGN_RA_APP:info}
+          gen: ${RA_APP_LOGGING_LEVEL_CH_SWISSIGN_RA_GEN:info}
+
+spring:
+  main:
+    web-application-type: none
+    banner-mode: off
