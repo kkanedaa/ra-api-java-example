@@ -56,5 +56,4 @@ tasks.openApiGenerate.dependsOn tasks.downloadFile
 
 compileJava.dependsOn tasks.openApiGenerate
 
-
 apply plugin: 'org.openapi.generator'
