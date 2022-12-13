@@ -34,8 +34,6 @@ dependencies {
     api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
     api "org.openapitools:jackson-databind-nullable:$jacksonDatabindNullableVersion"
     compileOnly 'jakarta.annotation:jakarta.annotation-api'
-    // Only for OpenAPI Generator
-    compileOnly 'org.slf4j:slf4j-simple'
 }
 
 compileJava {
@@ -55,9 +53,6 @@ task downloadFile(type: Download) {
     dest buildDir
     onlyIfModified true
     useETag false
-    dependencies {
-        compileOnly 'org.slf4j:slf4j-simple'
-    }
 }
 
 openApiGenerate {
