@@ -102,11 +102,12 @@ public final class RegistrationAuthorityRepositoryImpl implements IRegistrationA
   }
 
   @Override
-  public ResponseEntity<CertificateOrderDto> issueCertificate(final String uuid, final String pem)
+  public ResponseEntity<CertificateOrderDto> issueCertificate(
+      final String productUUID, final String pem)
       throws JsonProcessingException, RestClientException {
     refreshToken();
 
-    return api.issueCertificateWithHttpInfo(uuid, objectMapper.writeValueAsString(pem));
+    return api.issueCertificateWithHttpInfo(productUUID, objectMapper.writeValueAsString(pem));
   }
 
   @Override

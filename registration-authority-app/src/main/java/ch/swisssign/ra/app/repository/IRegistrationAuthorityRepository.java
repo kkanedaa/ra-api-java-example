@@ -14,7 +14,7 @@ public interface IRegistrationAuthorityRepository {
 
   ClientDto getClient();
 
-  ResponseEntity<CertificateOrderDto> issueCertificate(final String uuid, final String pem)
+  ResponseEntity<CertificateOrderDto> issueCertificate(final String productUUID, final String pem)
       throws JsonProcessingException;
 
   ResponseEntity<List<String>> getCertificateChain(final String orderUUID);
