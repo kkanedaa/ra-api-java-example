@@ -17,8 +17,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.asn1.x509.Certificate;
@@ -39,20 +37,6 @@ public class RegistrationServiceImpl implements IRegistrationService {
   private final RetryTemplate retryTemplate;
 
   private final IRegistrationAuthorityRepository repository;
-
-  private static <T> Collector<T, ?, T> getSingletonElement() {
-    return Collectors.collectingAndThen(
-        Collectors.toList(),
-        list -> {
-          if (list.size() != 1) {
-            throw new RegistrationServiceException(
-                String.format(
-                    "Only one element is expected but there are %d elements", list.size()));
-          }
-
-          return list.get(0);
-        });
-  }
 
   public void validateDomains(final List<String> domains) throws RegistrationServiceException {
     final var client = repository.getClient();
