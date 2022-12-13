@@ -33,6 +33,18 @@ dependencies {
     compileOnly 'jakarta.annotation:jakarta.annotation-api'
 }
 
+compileJava {
+    dependsOn(tasks.openApiGenerate)
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir new File(buildDir as File, "generate-resources/main/")
+        }
+    }
+}
+
 task downloadFile(type: Download) {
     src "https://raw.githubusercontent.com/SwissSign-AG/RaApi/main/api.json"
     dest buildDir
@@ -60,13 +72,3 @@ openApiGenerate {
 }
 
 tasks.openApiGenerate.dependsOn tasks.downloadFile
-
-compileJava.dependsOn tasks.openApiGenerate
-
-sourceSets {
-    main {
-        java {
-            srcDir new File(buildDir, "generate-resources/main/")
-        }
-    }
-}
