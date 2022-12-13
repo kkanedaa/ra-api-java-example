@@ -41,7 +41,7 @@ public class RegistrationServiceImpl implements IRegistrationService {
   public void validateDomains(final List<String> domains) throws RegistrationServiceException {
     final var client = repository.getClient();
 
-    log.info("List of domains were requested to be prevalidated: {}", domains);
+    log.info("Found requested client {} ({})", client.getName(), client.getUuid());
 
     final var prevalidatedDomainResponse = repository.getPrevalidatedDomains(client.getUuid());
 
@@ -53,6 +53,8 @@ public class RegistrationServiceImpl implements IRegistrationService {
     }
 
     final var prevalidatedDomains = Objects.requireNonNull(prevalidatedDomainResponse.getBody());
+
+    log.info("List of domains were requested to be prevalidated: {}", domains);
 
     final var findings =
         prevalidatedDomains.stream()
@@ -134,6 +136,8 @@ public class RegistrationServiceImpl implements IRegistrationService {
       throws RegistrationServiceException {
     final var client = repository.getClient();
 
+    log.info("Found requested client {} ({})", client.getName(), client.getUuid());
+
     final var product =
         Optional.ofNullable(client.getProducts()).orElseGet(Collections::emptyList).stream()
             .filter(
@@ -145,6 +149,8 @@ public class RegistrationServiceImpl implements IRegistrationService {
                 () ->
                     new RegistrationServiceException(
                         String.format("The requested product (%s) not found", productName)));
+
+    log.info("Found requested product {} ({})", product.getProductName(), product.getUuid());
 
     String csr;
 
