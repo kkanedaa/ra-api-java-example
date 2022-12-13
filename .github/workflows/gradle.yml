@@ -1,4 +1,4 @@
-name: buid-gradle
+name: build-gradle
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  gradle:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v3
