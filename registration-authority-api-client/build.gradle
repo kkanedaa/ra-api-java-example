@@ -35,7 +35,7 @@ dependencies {
     api "org.openapitools:jackson-databind-nullable:$jacksonDatabindNullableVersion"
     compileOnly 'jakarta.annotation:jakarta.annotation-api'
     // Only for OpenAPI Generator
-    compileOnly 'org.slf4j:slf4j-api'
+    compileOnly 'org.slf4j:slf4j-simple'
 }
 
 compileJava {
@@ -56,7 +56,7 @@ task downloadFile(type: Download) {
     onlyIfModified true
     useETag false
     dependencies {
-        compileOnly 'org.slf4j:slf4j-api'
+        compileOnly 'org.slf4j:slf4j-simple'
     }
 }
 
