@@ -1,14 +1,18 @@
-plugins {
-    id 'org.springframework.boot' version '2.7.6' apply false
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id "org.openapi.generator" version "6.2.1"
-    id "de.undercouch.download" version "5.3.0"
-    id 'java'
+buildscript {
+    ext {
+        swaggerCoreVersion = '1.6.8'
+        jacksonDatabindNullableVersion = '0.2.4'
+        jsr305Version = '3.0.2'
+    }
 }
 
-group = 'ch.swisssign.ra'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+plugins {
+    id 'org.springframework.boot' version '2.7.6' apply false
+    id 'io.spring.dependency-management' version '1.1.0'
+    id "org.openapi.generator" version "6.2.1"
+    id "de.undercouch.download" version "5.3.0"
+    id 'java-library'
+}
 
 dependencyManagement {
     imports {
@@ -17,13 +21,16 @@ dependencyManagement {
 }
 
 dependencies {
-    implementation 'org.springframework:spring-web'
-    implementation 'org.springframework:spring-context'
-    implementation 'com.fasterxml.jackson.core:jackson-databind'
-    implementation 'com.fasterxml.jackson.core:jackson-annotations'
-    implementation 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    api "com.google.code.findbugs:jsr305:$jsr305Version"
+    api "io.swagger:swagger-annotations:$swaggerCoreVersion"
+    api 'org.springframework:spring-web'
+    api 'org.springframework:spring-context'
+    api 'com.fasterxml.jackson.core:jackson-databind'
+    api 'com.fasterxml.jackson.core:jackson-annotations'
+    api 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider'
+    api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    compileOnly 'jakarta.annotation:jakarta.annotation-api'
+    api "org.openapitools:jackson-databind-nullable:$jacksonDatabindNullableVersion"
 }
 
 task downloadFile(type: Download) {
@@ -56,4 +63,10 @@ tasks.openApiGenerate.dependsOn tasks.downloadFile
 
 compileJava.dependsOn tasks.openApiGenerate
 
-apply plugin: 'org.openapi.generator'
+sourceSets {
+    main {
+        java {
+            srcDir new File(buildDir, "generate-resources/main/")
+        }
+    }
+}
