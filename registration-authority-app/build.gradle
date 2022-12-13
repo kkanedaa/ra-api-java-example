@@ -14,18 +14,23 @@ plugins {
 
 
 dependencies {
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     implementation project(':registration-authority-api-client')
-    implementation "io.jsonwebtoken:jjwt-api:$jsonwebtokenVersion"
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation ('org.springframework.boot:spring-boot-starter-validation') {
+        // We do not need Tomcat
         exclude group: 'org.apache.tomcat.embed', module: 'tomcat-embed-el'
         exclude group: 'org.apache.tomcat.embed', module: 'tomcat-embed-core'
         exclude group: 'org.apache.tomcat.embed', module: 'tomcat-embed-websocket'
     }
+    // To poll endpoint
     implementation 'org.springframework.retry:spring-retry'
     implementation 'org.springframework:spring-aspects'
+    // To generate signed JWT (JWS)
+    implementation "io.jsonwebtoken:jjwt-api:$jsonwebtokenVersion"
+    // To generate Certificate Signing Request
     implementation "org.bouncycastle:bcpkix-jdk18on:$bouncycastleVersion"
     runtimeOnly "io.jsonwebtoken:jjwt-impl:$jsonwebtokenVersion"
     runtimeOnly "io.jsonwebtoken:jjwt-jackson:$jsonwebtokenVersion"
+    // IDE Helper
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 }

@@ -28,7 +28,7 @@
       <version>3.0.2</version>
     </dependency>
 
-    <!-- JSON processing: jackson -->
+    <!-- JSON processing -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>

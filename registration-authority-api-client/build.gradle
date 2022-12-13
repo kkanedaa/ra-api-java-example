@@ -21,14 +21,17 @@ dependencyManagement {
 }
 
 dependencies {
+    // HTTP client: Spring RestTemplate
+    api 'org.springframework:spring-web'
+    api 'org.springframework:spring-context'
+    api "io.swagger:swagger-annotations:$swaggerCoreVersion"
+    // @Nullable annotation
+    api "com.google.code.findbugs:jsr305:$jsr305Version"
+    // JSON processing
     api 'com.fasterxml.jackson.core:jackson-databind'
     api 'com.fasterxml.jackson.core:jackson-annotations'
     api 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider'
     api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
-    api "com.google.code.findbugs:jsr305:$jsr305Version"
-    api "io.swagger:swagger-annotations:$swaggerCoreVersion"
-    api 'org.springframework:spring-web'
-    api 'org.springframework:spring-context'
     api "org.openapitools:jackson-databind-nullable:$jacksonDatabindNullableVersion"
     compileOnly 'jakarta.annotation:jakarta.annotation-api'
 }
