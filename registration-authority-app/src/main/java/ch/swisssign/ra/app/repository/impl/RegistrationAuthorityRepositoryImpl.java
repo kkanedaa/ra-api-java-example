@@ -94,11 +94,11 @@ public final class RegistrationAuthorityRepositoryImpl implements IRegistrationA
   }
 
   @Override
-  public List<ClientDNSDto> getPrevalidatedDomains(final String clientUUID)
+  public ResponseEntity<List<ClientDNSDto>> getPrevalidatedDomains(final String clientUUID)
       throws RestClientException {
     refreshToken();
 
-    return api.getClientPrevalidatedDomains(clientUUID);
+    return api.getClientPrevalidatedDomainsWithHttpInfo(clientUUID);
   }
 
   @Override

@@ -43,7 +43,16 @@ public class RegistrationServiceImpl implements IRegistrationService {
 
     log.info("List of domains were requested to be prevalidated: {}", domains);
 
-    final var prevalidatedDomains = repository.getPrevalidatedDomains(client.getUuid());
+    final var prevalidatedDomainResponse = repository.getPrevalidatedDomains(client.getUuid());
+
+    if (prevalidatedDomainResponse.getStatusCode() != OK) {
+      throw new RegistrationServiceException(
+          String.format(
+              "Not expected API response during prevalidated domain listing: %s",
+              prevalidatedDomainResponse.getStatusCode()));
+    }
+
+    final var prevalidatedDomains = Objects.requireNonNull(prevalidatedDomainResponse.getBody());
 
     final var findings =
         prevalidatedDomains.stream()

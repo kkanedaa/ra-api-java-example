@@ -22,5 +22,5 @@ public interface IRegistrationAuthorityRepository {
   ResponseEntity<List<ClientDNSDto>> prevalidatedDomain(
       final String clientUUID, final String domain);
 
-  List<ClientDNSDto> getPrevalidatedDomains(final String clientUUID);
+  ResponseEntity<List<ClientDNSDto>> getPrevalidatedDomains(final String clientUUID);
 }
