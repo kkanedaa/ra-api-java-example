@@ -55,6 +55,9 @@ task downloadFile(type: Download) {
     dest buildDir
     onlyIfModified true
     useETag false
+    dependencies {
+        compileOnly 'org.slf4j:slf4j-api'
+    }
 }
 
 openApiGenerate {
