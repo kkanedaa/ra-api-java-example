@@ -7,7 +7,7 @@ buildscript {
 }
 
 plugins {
-    id 'org.springframework.boot' version '2.7.6' apply false
+    id 'org.springframework.boot' version "$springBootVersion" apply false
     id 'io.spring.dependency-management' version '1.1.0'
     id "org.openapi.generator" version "6.2.1"
     id "de.undercouch.download" version "5.3.0"
@@ -21,23 +21,23 @@ dependencyManagement {
 }
 
 dependencies {
-    api "com.google.code.findbugs:jsr305:$jsr305Version"
-    api "io.swagger:swagger-annotations:$swaggerCoreVersion"
-    api 'org.springframework:spring-web'
-    api 'org.springframework:spring-context'
     api 'com.fasterxml.jackson.core:jackson-databind'
     api 'com.fasterxml.jackson.core:jackson-annotations'
     api 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider'
     api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
-    compileOnly 'jakarta.annotation:jakarta.annotation-api'
+    api "com.google.code.findbugs:jsr305:$jsr305Version"
+    api "io.swagger:swagger-annotations:$swaggerCoreVersion"
+    api 'org.springframework:spring-web'
+    api 'org.springframework:spring-context'
     api "org.openapitools:jackson-databind-nullable:$jacksonDatabindNullableVersion"
+    compileOnly 'jakarta.annotation:jakarta.annotation-api'
 }
 
 task downloadFile(type: Download) {
     src "https://raw.githubusercontent.com/SwissSign-AG/RaApi/main/api.json"
     dest buildDir
     onlyIfModified true
-    useETag true
+    useETag false
 }
 
 openApiGenerate {
