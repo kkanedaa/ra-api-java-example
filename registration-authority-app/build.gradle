@@ -7,8 +7,8 @@ buildscript {
 
 plugins {
     id "io.freefair.lombok" version "6.6"
-    id 'org.springframework.boot' version "$springBootVersion"
-    id 'io.spring.dependency-management' version "$springDependencyManagementPluginVersion"
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'io.spring.dependency-management' version "${springDependencyManagementPluginVersion}"
     id 'java'
 }
 
@@ -26,11 +26,11 @@ dependencies {
     implementation 'org.springframework.retry:spring-retry'
     implementation 'org.springframework:spring-aspects'
     // To generate signed JWT (JWS)
-    implementation "io.jsonwebtoken:jjwt-api:$jsonwebtokenVersion"
+    implementation "io.jsonwebtoken:jjwt-api:${jsonwebtokenVersion}"
     // To generate Certificate Signing Request
-    implementation "org.bouncycastle:bcpkix-jdk18on:$bouncycastleVersion"
-    runtimeOnly "io.jsonwebtoken:jjwt-impl:$jsonwebtokenVersion"
-    runtimeOnly "io.jsonwebtoken:jjwt-jackson:$jsonwebtokenVersion"
+    implementation "org.bouncycastle:bcpkix-jdk18on:${bouncycastleVersion}"
+    runtimeOnly "io.jsonwebtoken:jjwt-impl:${jsonwebtokenVersion}"
+    runtimeOnly "io.jsonwebtoken:jjwt-jackson:${jsonwebtokenVersion}"
     // IDE Helper
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 }
