@@ -15,7 +15,7 @@ RUN mvn package
 # Production stage
 
 # Build container from an image including only JRE for the production stage
-FROM ubuntu/jre:17_edge
+FROM eclipse-temurin:17.0.8.1_1-jre
 
 WORKDIR /app
 
