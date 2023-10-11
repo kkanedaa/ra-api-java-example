@@ -5,7 +5,7 @@
 FROM maven:3.8.5-openjdk-17 as builder
 
 # Create group and user kei with ID 1500 and set user kei's primary group to group kei
-RUN groupadd -g 1500 kei; useradd -u 1500 -g 1500 kei; usermod -g kei kei
+RUN groupadd -g 1500 kei && useradd -u 1500 -g 1500 kei
 
 # Cached steps
 WORKDIR /build
