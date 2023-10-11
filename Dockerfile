@@ -10,7 +10,7 @@ RUN groupadd -g 1500 kei && useradd -u 1500 -g 1500 kei
 # Cached steps
 WORKDIR /build
 COPY . .
-RUN mvn install
+RUN mvn package 
 
 # Production stage
 
