@@ -1,6 +1,6 @@
 # Build stage
 
-# Build container from an image including JDK7 and Maven for the building stage
+# Build container from an image including JDK 17 and Maven for the building stage
 
 FROM maven:3.8.5-openjdk-17 as builder
 
@@ -15,7 +15,7 @@ RUN mvn install
 # Production stage
 
 # Build container from an image including only JRE for the production stage
-FROM ubuntu/jre:8_edge
+FROM ubuntu/jre:17_edge
 
 WORKDIR /app
 
